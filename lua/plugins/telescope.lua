@@ -1,6 +1,7 @@
 -- plugins/telescope.lua:
 local mapKey = require("utils.keyMapper").mapKey
 return {
+  {
     'nvim-telescope/telescope.nvim', 
     tag = '0.1.6',
     dependencies = { 'nvim-lua/plenary.nvim' },
@@ -11,4 +12,19 @@ return {
       mapKey('<leader>fb', builtin.buffers)
       mapKey('<leader>fh', builtin.help_tags)
     end,
+  },
+  {
+    'nvim-telescope/telescope-ui-select.nvim',
+    config = function()
+      require('telescope').setup({
+        extensions = {
+          ["ui-select"] = {
+            require("telescope.themes").get_dropdown {
+            }
+          }
+        }
+      })
+      require("telescope").load_extension("ui-select")
+    end
+  }
 }
